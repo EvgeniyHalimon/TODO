@@ -9,9 +9,9 @@ const warningTxt = document.querySelector(".warning_txt")
 
 let userArr = []
 
-formList.addEventListener("submit", (e) => {
-    e.preventDefault()
+formList.addEventListener("submit", () => {
     getDataFromStorage()
+    
     const findUser = userArr.find((item) => {
         return item.email === email.value
     })
@@ -28,7 +28,8 @@ formList.addEventListener("submit", (e) => {
     if(password.value !== passwordRepeat.value){
         warningTxt.innerHTML = "Password mismatch"
         return false
-    } else if(password.value === passwordRepeat.value){
+    } 
+    if(password.value === passwordRepeat.value && findUser.email !== email.value){
         document.location.href="../html/login-page.html"
     }
     localStorage.setItem("user-data", JSON.stringify(userArr))     
@@ -43,5 +44,9 @@ function getDataFromStorage() {
 }
 
 password.addEventListener("focus", () => {
+    warningTxt.innerHTML = ""
+})
+
+passwordRepeat.addEventListener("focus", () => {
     warningTxt.innerHTML = ""
 })
