@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="tag">
+        <p class="txt">Create tag</p>
+        <input type="text" class="input_txt">
+        <input type="color" class="input_color">
+        <input type="submit" value="Create" class="create-tag_btn">
+        <input type="submit" value="Clear all saves" class="clear_btn">
+    </div>
+
+    <div class="task">
+        <p class="txt">Add task<span class="alert_task"></span></p>
+        <input type="text" class="task_txt">
+        <select>
+            
+        </select>
+        <p class="alert_tag"></p>
+        <input type="submit" value="Add task" class="create-task_btn">
+    </div>
+    <div class="search_block">
+
+    </div>
+    <h4 class="list_title">List</h4>
+
+    <div class="task_block">
+        <ul class="task_list"></ul>
+    </div>
+    <div class="filter">
+        <h4 class="filter_title">Show achived</h4>
+        <span class="radio_group">
+            <input type="radio" name="state" class="radio" value = "on"><span>On</span>
+            <input type="radio" name="state" class="radio" value = "off"><span>Off</span>
+        </span>
+    </div>
+    <div class="archive_block">
+        <ul class="archive_list">
+
+        </ul>
+    </div>
+    <script src="../js/old.js"></script>
+</body>
+</html>

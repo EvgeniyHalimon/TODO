@@ -1,0 +1,97 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  text-decoration: none;
+  list-style-type: none;
+}
+
+.txt,
+h4,
+.input_txt,
+.input_color,
+.create-tag_btn,
+.task_txt,
+select,
+.radio_on,
+.alert_tag,
+.navbar_list li{
+  margin-right: 10px;
+}
+
+.tag, .task{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.alert_task{
+  margin-left: 10px;
+}
+
+.alert_tag,
+.alert_task{
+  color: red;
+}
+
+.list_title{
+  text-align: center;
+}
+
+.search_block{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.task_block, .filter, .archive_block, .navbar{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.search_block{
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.radio_off{
+  margin-right: 10px;
+  margin-left: 5px;
+}
+
+.hide{
+  display: none;
+}
+
+.navbar,
+.form-block,
+.login-block{
+  text-align: center;
+}
+
+.navbar_list{
+  display: flex;
+}
+
+.navbar_list li:last-child{
+  margin-bottom: 0;
+}
+
+h1{
+  margin-bottom: 10px;
+}
+
+.form-list{
+  display: inline-grid;
+}
+
+.form-list input{
+  margin-bottom: 5px;
+}
+
+.form-list input:last-child{
+  margin-bottom: 0px;
+}
