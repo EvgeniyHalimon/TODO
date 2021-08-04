@@ -6,6 +6,16 @@
   list-style-type: none;
 }
 
+.logout{
+  text-align: right;
+  margin-right: 5px;
+}
+
+.welcome,
+.list_title{
+  text-align: center;
+}
+
 .txt,
 h4,
 .input_txt,
@@ -33,10 +43,6 @@ select,
 .alert_tag,
 .alert_task{
   color: red;
-}
-
-.list_title{
-  text-align: center;
 }
 
 .search_block{

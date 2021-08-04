@@ -11,7 +11,26 @@ function clearSaves() {
     window.location.reload()
 }
 
+const logout = document.querySelector(".logout")
+logout.addEventListener("submit", (e) => {
+    e.preventDefault()
+    document.location.href="../html/login-page.html"
+    localStorage.removeItem("account")
+})
 
+const welcomeText = document.querySelector(".welcome")
+
+let account = []
+getDataFromStorage()
+function getDataFromStorage() {
+    const getData = localStorage.getItem("account")
+    const parseData = JSON.parse(getData)
+    if(parseData){
+        account = parseData
+    }
+}
+
+welcomeText.innerText = `${account.name} : online`
 
 const select = document.querySelector("select")
 const alertTag = document.querySelector(".alert_tag")
@@ -19,7 +38,7 @@ const alertTag = document.querySelector(".alert_tag")
 let tagArr = [{
         tag: "Выбери тег",
         color: "#ffffff"
-    }]
+    }]  
 
 getTagsFromStorage()
 
@@ -32,28 +51,35 @@ function createTag() {
     if(!findTag){
         tagArr.push({
             tag: tagName,
-            color: tagColor
+            color: tagColor,
+            email: account.email
         })
     } else{
         alert("This tag or color has already exist!")
     }
+    
+    console.log(tagArr)
     printItems()
 }
-
+let test = tagArr.filter(item => item.email !== account.email)
+console.log(test)
 function printItems(){
+    const filterTag = tagArr.filter((item) => {
+        return item.email === account.email
+    })
     select.innerHTML = ""
-    for (let i = 0; i < tagArr.length; i++){
+    for (let i = 0; i < filterTag.length; i++){
         const option = document.createElement("option")
         select.appendChild(option)
-        let {tag, color } = tagArr[i]
+        let {tag, color } = filterTag[i]
         option.innerText = `${tag}`
         option.style.background = `${color}`
     }
-    localStorage.setItem("data", JSON.stringify(tagArr))
+    localStorage.setItem("tag", JSON.stringify(tagArr))
 }
 
 function getTagsFromStorage() {
-    let getData = localStorage.getItem("data")
+    let getData = localStorage.getItem("tag")
     let parseData = JSON.parse(getData)
     if(parseData){
         tagArr = parseData
@@ -110,17 +136,21 @@ function createTask() {
             task: taskName,
             tag: findTask.tag,
             color: findTask.color,
-            id: Date.now()
+            id: Date.now(),
+            email: account.email
         })
     }
     printTask()
 }
 
 function printTask() {
+    const filterTask = taskArr.filter((item) => {
+        return item.email === account.email
+    })
     taskList.innerHTML = ""
-    for(let i = 0; i < taskArr.length; i++){
+    for(let i = 0; i < filterTask.length; i++){
         const taskElem = document.createElement("li")
-        let {task, tag, color, id} = taskArr[i]
+        let {task, tag, color, id} = filterTask[i]
         const chk = document.createElement("input")
         chk.type = "checkbox"
         chk.checked = false
@@ -138,7 +168,7 @@ function printTask() {
         spanTag.innerHTML = `${tag}`
         chk.value = `${task}`
     }
-    if(taskArr.length > 0){
+    if(filterTask.length > 0){
         searchBlock.style.display = "flex"
     } else{
         searchBlock.style.display = "none"
@@ -167,7 +197,8 @@ function setToArchive(){
         task: findTask.task,
         tag: findTask.tag,
         color: findTask.color,
-        id: findTask.id
+        id: findTask.id,
+        email: account.email
     })
     const find = taskArr.filter((item) => {
         return item.id !== Number(this.id)
@@ -179,8 +210,11 @@ function setToArchive(){
 }
 
 function printArchive() {
+    const archiveFilter = archiveArr.filter((item) => {
+        return item.email === account.email
+    })
     archiveList.innerHTML = ""
-    for (let i = 0; i < archiveArr.length; i++) {
+    for (let i = 0; i < archiveFilter.length; i++) {
         const archiveElem = document.createElement("li")
         const chkArchive = document.createElement("input")
         chkArchive.type = "checkbox"
@@ -192,7 +226,7 @@ function printArchive() {
         archiveElem.prepend(chkArchive)
         archiveElem.append(archiveTask)
         archiveElem.append(archiveTag)
-        let {task, tag, color, id} = archiveArr[i]
+        let {task, tag, color, id} = archiveFilter[i]
         chkArchive.id = `${id}`
         archiveTask.innerHTML = `${task} `
         archiveTask.style.textDecoration = "line-through"
@@ -284,7 +318,6 @@ searchTag.addEventListener("input", () => {
     const taskItems = document.querySelectorAll(".task_list li")
     if(searchValue !== ""){
         taskItems.forEach((item) =>{
-            console.log(item.innerText)
             if(item.id.search(searchValue) == -1){
                 item.classList.add("hide")
                 
