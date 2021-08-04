@@ -160,7 +160,6 @@ function setToArchive(){
     const find = taskArr.filter((item) => {
         return item.id !== Number(this.id)
     })
-    console.log(find)
     taskArr = find
     printTask()
     printArchive()
@@ -194,7 +193,6 @@ getDataFromStorage(archive, archiveArr, printArchive)
 
 function removeToList() {
     const findArchive = archiveArr.find((item) =>{
-        console.log(this.id)
         return item.id === Number(this.id)
     })
     taskArr.push({

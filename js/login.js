@@ -17,8 +17,6 @@ loginForm.addEventListener("submit", (e) => {
     if(findUser.password !== loginPassword.value){
         alert("Wrong password")
     }
-    console.log(loginArr)
-    console.log(findUser)
     localStorage.setItem("account", JSON.stringify(findUser))
     document.location.href="../html/to-do.html" 
 })

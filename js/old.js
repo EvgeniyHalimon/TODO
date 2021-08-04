@@ -7,7 +7,18 @@ createTagBtn.addEventListener("click", createTag)
 clearBtn.addEventListener("click", clearSaves)
 
 function clearSaves() {
-    localStorage.clear()
+    let getTag = localStorage.getItem("tag")
+    let getTask = localStorage.getItem("task")
+    let getArchive = localStorage.getItem("archive")
+    let parseTag = JSON.parse(getTag)
+    let parseTask = JSON.parse(getTask)
+    let parseArchive = JSON.parse(getArchive)
+    let filterTag = parseTag.filter(item => item.email !== account.email)
+    let filterTask = parseTask.filter(item => item.email !== account.email)
+    let filterArchive = parseArchive.filter(item => item.email !== account.email)
+    localStorage.setItem("tag", JSON.stringify(filterTag))
+    localStorage.setItem("task", JSON.stringify(filterTask))
+    localStorage.setItem("archive", JSON.stringify(filterArchive))
     window.location.reload()
 }
 
@@ -57,12 +68,9 @@ function createTag() {
     } else{
         alert("This tag or color has already exist!")
     }
-    
-    console.log(tagArr)
     printItems()
 }
-let test = tagArr.filter(item => item.email !== account.email)
-console.log(test)
+
 function printItems(){
     const filterTag = tagArr.filter((item) => {
         return item.email === account.email
@@ -203,7 +211,6 @@ function setToArchive(){
     const find = taskArr.filter((item) => {
         return item.id !== Number(this.id)
     })
-    console.log(find)
     taskArr = find
     printTask()
     printArchive()
@@ -246,12 +253,10 @@ function getTaskFromArchive() {
 }
 
 function removeToList() {
-    console.log("!")
     const findArchive = archiveArr.find((item) =>{
-        console.log(this.id)
+
         return item.id === Number(this.id)
     })
-    console.log(findArchive)
     taskArr.push({
         task: findArchive.task,
         tag: findArchive.tag,
